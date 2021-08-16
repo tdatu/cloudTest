@@ -15,7 +15,7 @@ def filter_nones(d):
 
 
 def list(request):
-    defaults = dict(format="jpg", height=150, width=150)
+    defaults = dict(format="jpg", height=100, width=100)
     defaults["class"] = "thumbnail inline"
 
     # The different transformations to present
@@ -25,7 +25,7 @@ def list(request):
         dict(crop="fit", format="png"),
         dict(crop="thumb", gravity="face"),
         dict(format="png", angle=20, height=None, width=None, transformation=[
-            dict(crop="fill", gravity="north", width=150, height=150, effect="sepia"),
+            dict(crop="fill", gravity="north", width=100, height=100, effect="sepia"),
         ]),
     ]
     samples = [filter_nones(dict(defaults, **sample)) for sample in samples]
@@ -78,3 +78,8 @@ def direct_upload_complete(request):
         ret = dict(errors=form.errors)
 
     return HttpResponse(json.dumps(ret), content_type='application/json')
+
+
+#def delete(request):
+#   return render(request, 'list.html') 
+

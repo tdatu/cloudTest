@@ -4,6 +4,7 @@ from cloudinary.forms import CloudinaryJsFileField, CloudinaryUnsignedJsFileFiel
 # Next two lines are only used for generating the upload preset sample name
 from cloudinary.compat import to_bytes
 import cloudinary, hashlib
+from cloudinary.forms import CloudinaryFileField
 
 from .models import Photo
 
@@ -11,6 +12,14 @@ class PhotoForm(ModelForm):
     class Meta:
         model = Photo
         fields = '__all__'
+
+    image = CloudinaryFileField(
+        options = {
+            'tags': "TestInterview",
+            'crop': 'limit',
+            'width': 500, 
+            'height': 500,
+        })
 
 class PhotoDirectForm(PhotoForm):
     image = CloudinaryJsFileField()
